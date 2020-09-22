@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8" />
+<title
+	th:text="'Spring Boot: MVC + Thymeleaf + Data JPA - ' + ${titulo}"></title>
+
+
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap/bootstrap.min.css}" />
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap/bootstrap-datetimepicker.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/timepicker.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/fontawesome.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/dataTable/jquery.dataTables.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/dataTable/responsive.dataTables.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/dataTable/dataTables.bootstrap4.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap/buttons.bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/all.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap/bootstrap4-toggle.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/sweetalert/sweetalert2.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/fullcalendar/core/main.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/fullcalendar/daygrid/main.css}" />
+
+
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+		<!-- jQuery first, then Bootstrap JS -->
+		<script th:src="@{/js/popper.min.js}"></script>
+		<script th:src="@{/js/bootstrap/bootstrap.min.js}"></script>	
+		
+		<!-- DATATABLES -->	
+		<script th:src="@{/js/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/js/dataTable/dataTables.bootstrap4.min.js}"></script>
+		<script th:src="@{/js/dataTable/dataTables.buttons.min.js}"></script>		
+		<script th:src="@{/js/bootstrap/bootstrap4-toggle.min.js}"></script>		
+		<script th:src="@{/js/funciones.js}"></script>
+		<script th:src="@{/js/Chart.min.js}"></script>
+		<script th:src="@{/js/bootbox.min.js}"></script>	
+		<script th:src="@{/js/sweetalert/sweetalert2.all.min.js}"></script>	
+					
+		<!-- FULL CALENDAR -->	
+		<script th:src="@{/js/fullcalendar/core/main.js}"></script>
+		<script th:src="@{/js/fullcalendar/daygrid/main.js}"></script>
+		<script th:src="@{/js/fullcalendar/interaction/main.js}"></script>
+				
+		<script th:src="@{/js/timepicker.js}"></script>
+		<script th:src="@{/js/moment-with-locales.js}"></script>
+		<script th:src="@{/js/bootstrap/bootstrap-datetimepicker.min.js}"></script>
+		
+
+</head>
+<body>
+	<header th:fragment="header">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark pt-2 pb-2">
+			<span class="navbar-brand ml-2 mr-4">JobTime</span>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNav" aria-controls="navbarNav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li sec:authorize="hasRole('ROLE_ADMIN')"
+						id="tab_incidencias"
+						class="nav-item ml-2 mr-2"><a class="nav-link"
+						th:href="@{/incidencias}">Gestión de Incidencias</a></li>
+					<li sec:authorize="hasRole('ROLE_ADMIN')"
+						id="tab_listar"
+						class="nav-item ml-2 mr-2"><a class="nav-link"
+						th:href="@{/listar}">Gestión de Usuarios</a></li>
+					<li sec:authorize="hasRole('ROLE_ADMIN')"
+						id="tab_solicitudes"
+						class="nav-item ml-2 mr-2"><a class="nav-link"
+						th:href="@{/solicitudes}">Gestión de Solicitudes/Ausencias</a></li>
+					<li sec:authorize="!hasRole('ROLE_ADMIN')"
+						id="tab_fichar"
+						class="nav-item"><a class="nav-link ml-2 mr-2"
+						th:href="@{/fichar}">Fichaje de la jornada</a></li>
+					<li sec:authorize="!hasRole('ROLE_ADMIN')" 
+						id="tab_solicitudes"
+						class="nav-item"><a class="nav-link ml-2 mr-2" th:href="@{/solicitudes}">Solicitudes
+							/ Ausencias</a></li>
+					<li sec:authorize="hasRole('ROLE_ADMIN')" 
+						id="tab_controlhorario"
+						class="nav-item"><a
+						class="nav-link ml-2 mr-2" th:href="@{/controlhorario}">Control Horario</a></li>
+					<li sec:authorize="hasRole('ROLE_ADMIN')" 
+						id="tab_informes"
+						class="nav-item"><a class="nav-link ml-2 mr-2" th:href="@{/informes}">Informes</a></li>
+					<li sec:authorize="!hasRole('ROLE_ADMIN')"
+						id="tab_perfil"
+						 class="nav-item"><a class="nav-link ml-2 mr-2" th:href="@{/perfil}">Perfil del empleado</a>
+					<li	id="tab_ajustes"
+						 class="nav-item"><a class="nav-link ml-2 mr-2" th:href="@{/ajustes}">Ajustes</a>
+					</li>
+				</ul>
+			</div>
+			<a class="navbar-brand text-white pt-2 pb-2" th:href="@{/logout}"><small>Cerrar
+					Sesión</small></a>
+
+		</nav>
+
+		<div class="alert alert-success" th:if="${success != null}"
+			th:text="${success}"></div>
+		<div class="alert alert-danger" th:if="${error != null}"
+			th:text="${error}"></div>
+		<div class="alert alert-warning" th:if="${warning != null}"
+			th:text="${warning}"></div>
+		<div class="alert alert-info" th:if="${info != null}"
+			th:text="${info}"></div>
+	</header>
+
+	<div class="container"></div>
+
+	<footer th:fragment="footer">
+		
+		<script>
+			$(document).ready( function () {
+				/// Url actual
+				let url = window.location.href;
+	
+				/// Elementos de li
+				const tabs = ["incidencias", "listar", "solicitudes", "fichar",
+					"controlhorario", "informes", "perfil", "ajustes"];
+	
+				tabs.forEach(e => {
+				    /// Agregar .php y ver si lo contiene en la url
+				    if (url.indexOf(e) !== -1) {
+				        /// Agregar tab- para hacer que coincida la Id
+				        setActive("tab_" + e);
+				    }
+	
+				});
+	
+				/// Funcion que asigna la clase active
+				function setActive(id) {
+				    document.getElementById(id).setAttribute("class", "nav-item active");
+				}
+			});
+		</script>
+		
+		
+	</footer>
+</body>
+</html>
